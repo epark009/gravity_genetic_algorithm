@@ -6,11 +6,6 @@ ObserverNotifier::ObserverNotifier()
 
 ObserverNotifier::~ObserverNotifier()
 {
-	for(std::list<ObserverNotifier*>::iterator i = observers.begin(); i != observers.end(); i++)
-	{
-		delete *i;
-	}
-	observers.clear();
 }
 
 // sends messages to any observers without arguments

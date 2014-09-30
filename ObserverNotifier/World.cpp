@@ -102,7 +102,7 @@ InitialWorldState::InitialWorldState(SDL_Point window_size): WorldState(window_s
 	num_planets = 3;
 	num_ships = 100;
 	gravity_k_modifier = 50; // gravity constant determined by size of planet, this will divide that number
-	max_initial_velocity = 4;
+	max_initial_velocity = 10;
 }
 
 InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers): WorldState(window_size)
@@ -111,7 +111,7 @@ InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNo
 	num_ships = 100;
 	this->observers = observers;
 	gravity_k_modifier = 50; // gravity constant determined by size of planet, this will divide that number
-	max_initial_velocity = 4;
+	max_initial_velocity = 10;
 }
 
 InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers, std::list<CIRCLE> planets, std::list<SHIP> ships, SDL_Point start, double start_angle, double gravity_k_modifier, double max_initial_velocity): WorldState(window_size, observers, planets, ships, start, start_angle, gravity_k_modifier, max_initial_velocity)
@@ -311,7 +311,7 @@ void SimulatingWorldState::run(World* world)
 				}
 
 				// set as crashed if too far
-				if(distance >= window_size.x * 2 || distance >= window_size.y * 2)
+				if(i->x < -100 || i->x > window_size.x + 100 || i->y < -100 || i->y > window_size.y + 100)
 				{
 					i->crashed = true;
 					i->score = i->score == 0? current_time - last_time : i->score;
@@ -544,6 +544,7 @@ void World::run()
 // only WorldState classes should call this function
 void World::set_state(WorldState* new_state)
 {
+	delete current_state;
 	current_state = new_state;
 }
 
