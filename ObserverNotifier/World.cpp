@@ -445,7 +445,8 @@ void GeneticWorldState::run(World* world)
 			i->length = 20;
 			i->crashed = false;
 			i->score = 0;
-			if(global::randrange(1))
+			dice = global::randrange(2);
+			if(dice == 0 || dice == 2)
 			{
 				double rand_angle = (global::PI/2) * double(global::randrange(1000)) / 1000;
 				if(global::randrange(1)) rand_angle *= -1;
@@ -453,7 +454,7 @@ void GeneticWorldState::run(World* world)
 				i->angle = i->start_angle;
 				std::cout << "angle... ";
 			}
-			if(global::randrange(1))
+			else if(dice == 1 || dice == 2)
 			{
 				i->start_magnitude = (double(global::randrange(1, 100)) / 100) * max_initial_velocity;
 				i->magnitude = i->start_magnitude;
