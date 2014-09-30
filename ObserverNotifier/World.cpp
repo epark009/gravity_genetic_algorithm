@@ -311,7 +311,7 @@ void SimulatingWorldState::run(World* world)
 				}
 
 				// set as crashed if too far
-				if(distance >= window_size.x * 1.5 || distance >= window_size.y * 1.5)
+				if(distance >= window_size.x * 2 || distance >= window_size.y * 2)
 				{
 					i->crashed = true;
 					i->score = i->score == 0? current_time - last_time : i->score;
