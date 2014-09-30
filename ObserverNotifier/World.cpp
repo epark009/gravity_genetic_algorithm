@@ -474,8 +474,9 @@ void GeneticWorldState::run(World* world)
 					dice = double(global::randrange(1000)) / 1000;
 					if(dice < fitness)
 					{
-						candidate = *j;
-						break;
+						double j_chance = double(j->score) / j->score + candidate.score;
+						dice = double(global::randrange(1000)) / 1000;
+						if(dice < j_chance) candidate = *j;
 					}
 				}
 			}
