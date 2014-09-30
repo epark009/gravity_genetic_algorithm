@@ -100,18 +100,18 @@ void WorldState::draw_line(int start_x, int start_y, int end_x, int end_y, int r
 InitialWorldState::InitialWorldState(SDL_Point window_size): WorldState(window_size)
 {
 	num_planets = 3;
-	num_ships = 100;
-	gravity_k_modifier = 50; // gravity constant determined by size of planet, this will divide that number
+	num_ships = 50;
+	gravity_k_modifier = 20; // gravity constant determined by size of planet, this will divide that number
 	max_initial_velocity = 10;
 }
 
 InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers): WorldState(window_size)
 {
 	num_planets = 3;
-	num_ships = 100;
+	num_ships = 50;
 	this->observers = observers;
-	gravity_k_modifier = 50; // gravity constant determined by size of planet, this will divide that number
-	max_initial_velocity = 6;
+	gravity_k_modifier = 20; // gravity constant determined by size of planet, this will divide that number
+	max_initial_velocity = 10;
 }
 
 InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers, std::list<CIRCLE> planets, std::list<SHIP> ships, SDL_Point start, double start_angle, double gravity_k_modifier, double max_initial_velocity): WorldState(window_size, observers, planets, ships, start, start_angle, gravity_k_modifier, max_initial_velocity)
@@ -236,7 +236,7 @@ SimulatingWorldState::SimulatingWorldState(SDL_Point window_size): WorldState(wi
 	restarting = false;
 	last_time = SDL_GetTicks();
 	simulation_time = 300000;
-	border_limit = 500;
+	border_limit = 200;
 }
 
 SimulatingWorldState::SimulatingWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers, std::list<CIRCLE> planets, std::list<SHIP> ships, SDL_Point start, double start_angle, double gravity_k_modifier, double max_initial_velocity): WorldState(window_size, observers, planets, ships, start, start_angle, gravity_k_modifier, max_initial_velocity)
@@ -244,7 +244,7 @@ SimulatingWorldState::SimulatingWorldState(SDL_Point window_size, std::list<Obse
 	restarting = false;
 	last_time = SDL_GetTicks();
 	simulation_time = 300000;
-	border_limit = 500;
+	border_limit = 200;
 }
 
 SimulatingWorldState::~SimulatingWorldState()
