@@ -117,12 +117,26 @@ void ViewClient::do_draw(std::vector<void*> args, bool temporary)
 // just clear temporary items
 void ViewClient::do_clear_view()
 {
+	for(std::list<Drawable*>::iterator i = temporary.begin(); i != temporary.end(); i++)
+	{
+		delete *i;
+	}
+
 	temporary.clear();
 }
 
 // clear drawable items and text
 void ViewClient::do_full_clear_view()
 {
+	for(std::list<Drawable*>::iterator i = drawables.begin(); i != drawables.end(); i++)
+	{
+		delete *i;
+	}
+	for(std::list<Drawable*>::iterator i = temporary.begin(); i != temporary.end(); i++)
+	{
+		delete *i;
+	}
+
 	temporary.clear();
 	drawables.clear();
 }
