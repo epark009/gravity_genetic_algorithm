@@ -82,6 +82,7 @@ private:
 	bool restarting;
 	unsigned int last_time;
 	unsigned int simulation_time;
+	int border_limit;
 
 	void do_restart();
 
