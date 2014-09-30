@@ -236,6 +236,7 @@ SimulatingWorldState::SimulatingWorldState(SDL_Point window_size): WorldState(wi
 	restarting = false;
 	last_time = SDL_GetTicks();
 	simulation_time = 300000;
+	border_limit = 500;
 }
 
 SimulatingWorldState::SimulatingWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers, std::list<CIRCLE> planets, std::list<SHIP> ships, SDL_Point start, double start_angle, double gravity_k_modifier, double max_initial_velocity): WorldState(window_size, observers, planets, ships, start, start_angle, gravity_k_modifier, max_initial_velocity)
@@ -243,6 +244,7 @@ SimulatingWorldState::SimulatingWorldState(SDL_Point window_size, std::list<Obse
 	restarting = false;
 	last_time = SDL_GetTicks();
 	simulation_time = 300000;
+	border_limit = 500;
 }
 
 SimulatingWorldState::~SimulatingWorldState()
@@ -311,7 +313,7 @@ void SimulatingWorldState::run(World* world)
 				}
 
 				// set as crashed if too far
-				if(i->x < -100 || i->x > window_size.x + 100 || i->y < -100 || i->y > window_size.y + 100)
+				if(i->x < -border_limit || i->x > window_size.x + border_limit || i->y < -border_limit || i->y > window_size.y + border_limit)
 				{
 					i->crashed = true;
 					i->score = i->score == 0? current_time - last_time : i->score;
