@@ -111,7 +111,7 @@ InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNo
 	num_ships = 100;
 	this->observers = observers;
 	gravity_k_modifier = 50; // gravity constant determined by size of planet, this will divide that number
-	max_initial_velocity = 10;
+	max_initial_velocity = 6;
 }
 
 InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers, std::list<CIRCLE> planets, std::list<SHIP> ships, SDL_Point start, double start_angle, double gravity_k_modifier, double max_initial_velocity): WorldState(window_size, observers, planets, ships, start, start_angle, gravity_k_modifier, max_initial_velocity)
@@ -235,14 +235,14 @@ SimulatingWorldState::SimulatingWorldState(SDL_Point window_size): WorldState(wi
 {
 	restarting = false;
 	last_time = SDL_GetTicks();
-	simulation_time = 60000;
+	simulation_time = 300000;
 }
 
 SimulatingWorldState::SimulatingWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers, std::list<CIRCLE> planets, std::list<SHIP> ships, SDL_Point start, double start_angle, double gravity_k_modifier, double max_initial_velocity): WorldState(window_size, observers, planets, ships, start, start_angle, gravity_k_modifier, max_initial_velocity)
 {
 	restarting = false;
 	last_time = SDL_GetTicks();
-	simulation_time = 60000;
+	simulation_time = 300000;
 }
 
 SimulatingWorldState::~SimulatingWorldState()
