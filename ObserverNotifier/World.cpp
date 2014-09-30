@@ -454,7 +454,7 @@ void GeneticWorldState::run(World* world)
 				i->angle = i->start_angle;
 				std::cout << "angle... ";
 			}
-			else if(dice == 1 || dice == 2)
+			if(dice == 1 || dice == 2)
 			{
 				i->start_magnitude = (double(global::randrange(1, 100)) / 100) * max_initial_velocity;
 				i->magnitude = i->start_magnitude;
