@@ -136,9 +136,9 @@ void InitialWorldState::run(World* world)
 		CIRCLE p;
 		do
 		{
-			p.pos.x = global::randrange(window_size.x);
-			p.pos.y = global::randrange(window_size.y);
 			p.r = global::randrange(10, 100);
+			p.pos.x = global::randrange(p.r, window_size.x - p.r);
+			p.pos.y = global::randrange(p.r, window_size.y - p.r);
 		}while(!valid_planet(p));
 		p.color.r = 0;
 		p.color.g = 255;
@@ -192,7 +192,7 @@ bool InitialWorldState::valid_planet(CIRCLE p)
 
 	if(planets.size() == 0)
 	{
-		valid = true;
+		return true;
 	}
 	else
 	{
