@@ -99,7 +99,7 @@ void WorldState::draw_line(int start_x, int start_y, int end_x, int end_y, int r
 // INITIAL STATE
 InitialWorldState::InitialWorldState(SDL_Point window_size): WorldState(window_size)
 {
-	num_planets = 3;
+	num_planets = global::randrange(1, 8);
 	num_ships = 50;
 	gravity_k_modifier = 20; // gravity constant determined by size of planet, this will divide that number
 	max_initial_velocity = 10;
@@ -107,7 +107,7 @@ InitialWorldState::InitialWorldState(SDL_Point window_size): WorldState(window_s
 
 InitialWorldState::InitialWorldState(SDL_Point window_size, std::list<ObserverNotifier*> observers): WorldState(window_size)
 {
-	num_planets = 3;
+	num_planets = global::randrange(1, 8);
 	num_ships = 50;
 	this->observers = observers;
 	gravity_k_modifier = 20; // gravity constant determined by size of planet, this will divide that number
@@ -471,15 +471,13 @@ void GeneticWorldState::run(World* world)
 			SHIP candidate = ships.back();
 			for(std::list<SHIP>::iterator j = ships.begin(); j != ships.end(); j++)
 			{
-				if(j->score != i->score)
+				if(j->score != i->score && j->score > candidate.score)
 				{
 					double fitness = j->score / max_score;
 					dice = double(global::randrange(1000)) / 1000;
 					if(dice < fitness)
 					{
-						double j_chance = double(j->score) / j->score + candidate.score;
-						dice = double(global::randrange(1000)) / 1000;
-						if(dice < j_chance) candidate = *j;
+						candidate = *j;
 					}
 				}
 			}
